@@ -4,6 +4,7 @@
  */
 
 export default {
+  testTimeout: 80000,
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -147,7 +148,7 @@ export default {
 
   // The glob patterns Jest uses to detect test files
   testMatch: [
-    "**/__tests__/*.test.ts"
+    "**/__tests__/*/*.test.ts"
   ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped

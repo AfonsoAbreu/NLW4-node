@@ -31,7 +31,9 @@ export default new class SendMailService {
       from: "NPS <noreply@nps.com.br>"
     });
 
-    console.log('Message sent: %s', message.messageId);
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(message));
+    if (process.env.NODE_ENV !== "test") {
+      console.log('Message sent: %s', message.messageId);
+      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(message));
+    }
   }
 }

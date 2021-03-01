@@ -14,7 +14,7 @@ describe("Users", () => {
       email: "user@example.com",
       name: "User Example"
     });
-
+    console.log(response.body);
     expect(response.status).toBe(201);
   });
 
@@ -23,7 +23,7 @@ describe("Users", () => {
       email: "user@example.com",
       name: "User Example"
     });
-
+    console.log(response.body);
     expect(response.status).toBe(400);
   });
 });

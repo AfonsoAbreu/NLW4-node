@@ -14,7 +14,7 @@ describe("Surveys", () => {
       title: "example",
       description: "description"
     });
-
+    console.log(response.body);
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty("id");
   });
@@ -25,6 +25,7 @@ describe("Surveys", () => {
       description: "description"
     });
     const response = await request(app).get("/surveys");
+    console.log(response.body);
     expect(response.body.length).toBe(2);
   });
 });
