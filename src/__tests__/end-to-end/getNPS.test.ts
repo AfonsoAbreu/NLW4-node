@@ -1,5 +1,5 @@
 import request from "supertest";
-import { getCustomRepository, IsNull, Not } from "typeorm";
+import { getConnection, getCustomRepository} from "typeorm";
 
 import app from "../../app";
 import createConnection from "../../database";
@@ -11,6 +11,12 @@ describe("NPS generation", () => {
   beforeAll(async () => {
     const connection = await createConnection();
     await connection.runMigrations();
+  });
+
+  afterAll(async () => {
+    const connection = getConnection();
+    await connection.dropDatabase();
+    await connection.close();
   });
   
   it("Will create 10 accounts", async () => {

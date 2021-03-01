@@ -6,6 +6,7 @@ import SurveysRepository from "../repositories/SurveysRepository";
 import SurveysUsersRepository from "../repositories/SurveyUsersRepository";
 import UsersRepository from "../repositories/UsersRepository";
 import SendMailService from "../services/SendMailService";
+import AppError from "../errors/AppError";
 
 export default class SendMailController {
   async execute (req: Request, res: Response) {
@@ -16,15 +17,11 @@ export default class SendMailController {
     
     const user = await usersRepository.findOne({ email });//TODO: also fix this, by moving all the validation stuff into the Repository (with custom methods) and wrapping calls to these methods in try/catch blocks
     if (!user) {
-      return res.status(400).json({
-        error: "User does not exists"
-      });
+      throw new AppError("User does not exists");
     }
     const survey = await surveysRepository.findOne({ id: survey_id });//same thing here
     if (!survey) {
-      return res.status(400).json({
-        error: "Survey does not exists"
-      });
+      throw new AppError("Survey does not exists");
     }
     const npsPath = resolve(__dirname, "..", "views", "emails", "npsMail.hbs");
     const surveyUserAlreadyExists = await surveysUsersRepository.findOne({
